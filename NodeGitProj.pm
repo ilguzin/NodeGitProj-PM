@@ -407,18 +407,7 @@ Evolutionary migrate database schema based on Sequelize migrations.
 
 =cut
 sub db_migrate {
-  my ($cfg, $docroot) = @_;
-  #DEBUG:print(Dumper($cfg));
-  # Find out docroot
-  if ($docroot) {} # Explicit docroot passed - No probing actions
-  elsif (my $sr = $cfg->{'appcfg'}->{'staticroot'}) {
-     print(STDERR "docroot(appcfg): $sr\n");
-     # Current dir + staticroot value
-     $docroot = "./$sr";
-  }
-  else { $docroot = "./"; }
-  # Ensure docroot exists
-  if (! -d $docroot) {die("No static content root found ('$docroot')");}
+  my ($cfg) = @_;
   # Ensure sequelize cli is installed 
   if (-e 'sequelize' && -x _) {die("No sequelize cli found");}
   # Sequelize migrate
