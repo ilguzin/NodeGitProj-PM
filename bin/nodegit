@@ -116,8 +116,8 @@ my $ops = {
      print(STDERR "Deploying (fetch & checkout) Version '$ver'\n");
      $cfg->deploytag($ver, %para);
      # TODO: Make npm and bower updates
-     $cfg->db_migrate();
      $cfg->deps_install();
+     $cfg->db_migrate();
      # Problems:
      # - bower could interactively ask for Angular version (!!)
      # - Do npm and bower modules directly installed from Git work ok (??)
