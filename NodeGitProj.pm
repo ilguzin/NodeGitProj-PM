@@ -409,7 +409,7 @@ Evolutionary migrate database schema based on Sequelize migrations.
 sub db_migrate {
   my ($cfg) = @_;
   # Ensure sequelize cli is installed 
-  if (-e 'sequelize' && -x _) {die("No sequelize cli found");}
+  if (!-e 'sequelize') {die("No sequelize cli found");}
   # Sequelize migrate
   `sequelize db:migrate`;
 }
