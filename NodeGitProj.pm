@@ -411,10 +411,7 @@ sub db_migrate {
   # Ensure sequelize cli is installed 
   if (-e 'sequelize' && -x _) {die("No sequelize cli found");}
   # Sequelize migrate
-  my $cwd = getcwd();
-  chdir($docroot);
   `sequelize db:migrate`;
-  chdir($cwd);
 }
 
 =head2 $np->deps_check();
