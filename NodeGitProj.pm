@@ -294,6 +294,7 @@ sub server_restart {
    my @pms = ('pm2','forever'); # Supported process managers
    my $pm = '';
    my @mypms = map({$dd->{$_} ? $_ : ();} @pms); # Find pm in use
+   my $pm2_node_args = `--node-args="--max-old-space-size=$cfg->{'appcfg'}->{'maxOldSpaceSize'}"`;
    if ( ! @mypms) { print(STDERR "no process manager (@pms) listed as dev.dep."); return; }
    $pm = shift(@mypms);
    # Whatever  supported by particular pm (status N/A on forever, use list)
@@ -303,7 +304,7 @@ sub server_restart {
    #OLD: my @pmops = ("stop","start");
    my @pmops = @{$pmops_bypm{$pm}};
    print(STDERR "Call: @pmops\n");
-   my @cmds = map({"$pm $_ $cfg->{'main'}";} @pmops);
+   my @cmds = map({"$pm $_ $cfg->{'main'} $pm2_node_args";} @pmops);
    my $delay = 1;
    my $i = 0;
    for (@cmds) {
